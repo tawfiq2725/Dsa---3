@@ -103,17 +103,52 @@ class Node {
    * PostOrder
    *
    * 1.Visit all left subtree
-   * 2.Read the data of node
-   * 3.Visit all right subtree
+   * 2.Visit all right subtree
+   * 3.Read the data of node
    */ 
   
       Postorder(root){
           if(root){
             this.Inorder(root.left)
+            this.Inorder(root.right)
             console.log(root.value)
-              this.Inorder(root.right)
           }
       }
+
+
+
+    /**
+     * Breadth first search
+     * 
+     * To traverse all the node by depth level
+     * 
+     * 1.create queue
+     * 2.enque the root node
+     * 3.continue the stps --->  
+     * 
+     * 1.Deque the node 
+     * 2.Read the value 
+     * 3.Enqueue the nodes if childs are exist
+     * 
+     * */   
+
+    // Implementation of BFS
+
+    dfs(){
+        let queue = []
+        queue.push(this.root)
+        while(queue.length){
+            let curr = queue.shift()
+            console.log(curr.value)
+            if(curr.left){
+                queue.push(curr.left)
+            }
+            if(curr.right){
+                queue.push(curr.right)
+            }
+        }
+
+    }
       
       
   }
@@ -125,4 +160,5 @@ class Node {
   bst.insert(12)
   bst.insert(63)
   // bst.preorder(bst.root)
-  bst.Inorder(bst.root)
+//   bst.Inorder(bst.root)
+// bst.Postorder(bst.root)
