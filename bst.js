@@ -170,7 +170,46 @@ class Node {
     }
   }
 
-      
+    // Delete
+  delete(value){
+    this.root = this.deleteNode(this.root , value)
+  }
+
+  deleteNode(root, value) {
+    if (root === null) {
+      return root;
+    }
+
+    // Traverse the tree to find the node to delete
+    if (value < root.value) {
+      root.left = this.deleteNode(root.left, value); // Assign result back to root.left
+    } else if (value > root.value) {
+      root.right = this.deleteNode(root.right, value); // Assign result back to root.right
+    } else {
+      // Node to be deleted is found
+
+      // 1. Node has no children
+      if (!root.left && !root.right) {
+        return null;
+      }
+
+      // 2. Node has only one child
+      if (!root.left) {
+        return root.right;
+      } else if (!root.right) {
+        return root.left;
+      }
+
+      // 3. Node has two children
+      // Find the in-order successor (minimum value in the right subtree)
+      root.value = this.min(root.right);
+
+      // Delete the in-order successor
+      root.right = this.deleteNode(root.right, root.value);
+    }
+
+    return root;
+  }      
       
   }
   
